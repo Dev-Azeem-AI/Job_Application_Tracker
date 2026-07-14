@@ -3,6 +3,9 @@ from app.models.user import User
 from app.database import engine, Base
 from app.auth.hashing import hash_password
 from app.auth.jwt_handler import create_access_token
+from app.routers import auth
+
+
 
 Base.metadata.create_all(bind=engine)
 
@@ -48,3 +51,5 @@ def test_token():
     return {
         "access_token": token
     }
+    
+app.include_router(auth.router)    
