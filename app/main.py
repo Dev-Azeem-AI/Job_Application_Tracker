@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from app.models.user import User
 from app.database import engine, Base
 from app.auth.hashing import hash_password
+from app.auth.jwt_handler import create_access_token
 
 Base.metadata.create_all(bind=engine)
 
@@ -36,4 +37,14 @@ def test_hash():
     return {
         "original": password,
         "hashed": hashed
+    }
+    
+@app.get("/test-token")
+def test_token():
+    token = create_access_token(
+        {"sub": "azeem@gmail.com"}
+    )
+
+    return {
+        "access_token": token
     }
