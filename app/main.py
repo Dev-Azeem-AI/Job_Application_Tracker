@@ -13,14 +13,14 @@ app = FastAPI(
     title="Job Application Tracker API",
     version="1.0.0"
 )
-
+app.include_router(auth.router)
 
 @app.get("/")
 def home():
     return {
         "message": "Welcome to Job Application Tracker API"
     }
-Base.metadata.create_all(bind=engine)
+
 @app.get("/health")
 def health():
     return {
@@ -52,4 +52,4 @@ def test_token():
         "access_token": token
     }
     
-app.include_router(auth.router)    
+ 
