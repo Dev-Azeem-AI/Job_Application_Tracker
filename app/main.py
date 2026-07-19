@@ -1,11 +1,12 @@
 from fastapi import FastAPI
 from app.models.user import User
+from app.models.job import Job
 from app.database import engine, Base
 from app.auth.hashing import hash_password
 from app.auth.jwt_handler import create_access_token
 from app.routers import auth
-
-
+from app.auth.jwt_handler import verify_access_token
+from app.routers import jobs
 
 Base.metadata.create_all(bind=engine)
 
@@ -14,6 +15,7 @@ app = FastAPI(
     version="1.0.0"
 )
 app.include_router(auth.router)
+app.include_router(jobs.router)
 
 @app.get("/")
 def home():
@@ -52,4 +54,15 @@ def test_token():
         "access_token": token
     }
     
- 
+@app.get("/verify-token")
+def verify_token():
+    token = create_access_token(
+        {"sub": "azeem@gmail.com"}
+    )
+
+    email = verify_access_token(token)
+
+    return {
+        "token": token,
+        "email": email
+    }
