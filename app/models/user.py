@@ -25,3 +25,8 @@ class User(Base):
     back_populates="owner",
     cascade="all, delete"
 )
+    companies = relationship(
+    "Company",
+    back_populates="owner",
+    cascade="all, delete"
+)
