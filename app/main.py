@@ -9,6 +9,7 @@ from app.auth.jwt_handler import verify_access_token
 from app.routers import jobs
 from app.models.company import Company
 from app.routers import company
+from app.routers import dashboard
 
 Base.metadata.create_all(bind=engine)
 
@@ -19,6 +20,7 @@ app = FastAPI(
 app.include_router(auth.router)
 app.include_router(jobs.router)
 app.include_router(company.router)
+app.include_router(dashboard.router)
 
 @app.get("/")
 def home():
