@@ -10,6 +10,14 @@ from app.routers import jobs
 from app.models.company import Company
 from app.routers import company
 from app.routers import dashboard
+from app.models.resume import Resume
+from app.routers import resume
+from app.models.cover_letter import CoverLetter
+from app.routers import cover_letter
+from app.models.interview import Interview
+from app.routers import interview
+from app.models.notification import Notification
+from app.routers import notification
 
 Base.metadata.create_all(bind=engine)
 
@@ -21,6 +29,10 @@ app.include_router(auth.router)
 app.include_router(jobs.router)
 app.include_router(company.router)
 app.include_router(dashboard.router)
+app.include_router(resume.router)
+app.include_router(cover_letter.router)
+app.include_router(interview.router)
+app.include_router(notification.router)
 
 @app.get("/")
 def home():

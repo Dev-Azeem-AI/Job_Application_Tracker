@@ -30,3 +30,27 @@ class User(Base):
     back_populates="owner",
     cascade="all, delete"
 )
+    
+    resumes = relationship(
+    "Resume",
+    back_populates="owner",
+    cascade="all, delete"
+)
+    
+    cover_letters = relationship(
+    "CoverLetter",
+    back_populates="owner",
+    cascade="all, delete"
+)
+    
+interviews = relationship(
+    "Interview",
+    back_populates="owner",
+    cascade="all, delete"
+)
+
+notifications = relationship(
+    "Notification",
+    back_populates="owner",
+    cascade="all, delete"
+)
